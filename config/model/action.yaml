@@ -1,0 +1,9 @@
+action_dim: 14
+horizon: 16
+condition_dim: 256
+d_model: 256
+nhead: 8
+num_layers: 6
+dropout: 0.1
+diffusion_steps: 1000
+sampling_steps: 50
