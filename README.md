@@ -2,6 +2,16 @@
 
 This project is an open-source reimplementation of skild S1, a robotic vision-language-action (VLA) policy. The first phase implements `models/action`: a conditional diffusion action expert that takes a conditioning vector and generates action matrices with shape `[batch, horizon, action_dim]`.
 
+## About skild S1
+
+This project is inspired by the official [skild S1 announcement](https://skild.ai/blogs/s1). The defining ideas we aim to reproduce are:
+
+- **One-shot capability:** the policy should be able to perform a new task from a single demonstration, without task-specific retraining.
+- **Video as the demo interface:** demonstrations are provided as videos, allowing the system to learn from natural human demonstrations rather than rigid task annotations.
+- **Implicit context:** the demonstration video carries context that is not necessarily expressed as explicit language or labels, including task intent, object interaction, motion style, timing, and scene-specific constraints.
+
+The action expert in this repository is designed as one component of that broader system. Its conditioning interface is intentionally extensible so visual features, language features, robot state, and implicit context extracted from demonstration videos can be fused later.
+
 ## Project layout
 
 ```text
