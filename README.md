@@ -1,6 +1,6 @@
 # open-skild (WIP)
 
-This project is an open-source reimplementation of SKLID S1, a robotic vision-language-action (VLA) policy. The first phase implements `models/action`: a conditional diffusion action expert that takes a conditioning vector and generates action matrices with shape `[batch, horizon, action_dim]`.
+This project is an open-source reimplementation of skild S1, a robotic vision-language-action (VLA) policy. The first phase implements `models/action`: a conditional diffusion action expert that takes a conditioning vector and generates action matrices with shape `[batch, horizon, action_dim]`.
 
 ## Project layout
 
