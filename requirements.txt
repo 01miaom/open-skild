@@ -2,3 +2,4 @@ torch>=2.1
 numpy>=1.24
 pyyaml>=6.0
 # MCAP inspection: mcap>=1.1
+# Apple Silicon VLA language model (optional): mlx>=0.22, mlx-lm>=0.20

@@ -1,0 +1,10 @@
+data: data/vla/train.pt
+output: checkpoints/vla_policy.pt
+epochs: 10
+batch_size: 4
+learning_rate: 1.0e-4
+action_loss_weight: 1.0
+demo_loss_weight: 0.1
+progress_loss_weight: 0.2
+state_loss_weight: 0.2
+
