@@ -34,7 +34,6 @@ The VLA language branch uses Qwen3.5 0.8B through MLX-LM on Apple Silicon. Insta
 python -m training.finetune_qwen_mlx --config config/train/qwen3_5_0_8b_lora.yaml
 ```
 
-The model wrapper is in `models/language/mlx_qwen.py`. The language branch provides latent features to condition the action expert; the action expert does not consume generated text. Text generation remains available only for debugging and inspection. Put `train.jsonl` and `valid.jsonl` under the configured data directory. Each record should contain either a `text` field or a chat-style `messages` field.
 
 ## Quick start
 
