@@ -26,6 +26,16 @@ sample_data/                         Example MCAP data
 
 The action dimension is configurable in `config/model/action.yaml` rather than hard-coded. The current defaults are `action_dim=14` and `horizon=16`; update them after confirming the target robot's MCAP schema.
 
+## Language model: Qwen3.5 0.8B with MLX
+
+The VLA language branch uses Qwen3.5 0.8B through MLX-LM on Apple Silicon. Install the optional dependencies with `pip install mlx mlx-lm`, then run:
+
+```bash
+python -m training.finetune_qwen_mlx --config config/train/qwen3_5_0_8b_lora.yaml
+```
+
+The model wrapper is in `models/language/mlx_qwen.py`. The language branch provides latent features to condition the action expert; the action expert does not consume generated text. Text generation remains available only for debugging and inspection. Put `train.jsonl` and `valid.jsonl` under the configured data directory. Each record should contain either a `text` field or a chat-style `messages` field.
+
 ## Quick start
 
 ```bash
