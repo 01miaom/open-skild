@@ -24,7 +24,12 @@ class ActionDiffusion(nn.Module):
         self.net=nn.TransformerEncoder(layer,cfg.num_layers); self.out=nn.Sequential(nn.LayerNorm(cfg.d_model),nn.Linear(cfg.d_model,cfg.action_dim))
         beta=torch.linspace(1e-4,2e-2,cfg.diffusion_steps); self.register_buffer('betas',beta); self.register_buffer('alphas',1-beta); self.register_buffer('abar',torch.cumprod(1-beta,0))
     def predict_noise(self,noisy,t,condition):
-        h=self.action_in(noisy)+self.pos[:,:noisy.shape[1]]+self.time(t)[:,None]+self.condition(condition)[:,None]; return self.out(self.net(h))
+        if condition.ndim == 2:
+            condition = condition[:, None, :]
+        action_tokens = self.action_in(noisy) + self.pos[:, :noisy.shape[1]] + self.time(t)[:, None]
+        condition_tokens = self.condition(condition)
+        fused = self.net(torch.cat([condition_tokens, action_tokens], dim=1))
+        return self.out(fused[:, -noisy.shape[1]:])
     def loss(self,actions,condition):
         t=torch.randint(0,self.cfg.diffusion_steps,(actions.shape[0],),device=actions.device); noise=torch.randn_like(actions); a=self.abar[t].sqrt()[:,None,None]; s=(1-self.abar[t]).sqrt()[:,None,None]; return nn.functional.mse_loss(self.predict_noise(a*actions+s*noise,t,condition),noise)
     @torch.no_grad()

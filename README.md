@@ -48,4 +48,8 @@ Training data must be an `.npz` file with `actions` shaped `[N, horizon, action_
 python -m training.train_action --config config/model/action.yaml --data /path/to/data.npz
 ```
 
+## VLA pipeline
+
+The VLA policy combines image features, the current robot state, demonstration-video features, and a text prompt. A temporal encoder fuses these modalities and compresses them into latent features. The latent features condition the diffusion action expert, which predicts a matrix of the next 20 actions.
+
 To inspect MCAP topics, install `mcap` and run `python -m datasets.mcap_to_npz sample_data/open-source-12.mcap --list-topics`. Since schemas vary across robot versions, action extraction mappings are intentionally kept explicit and configurable.

@@ -1,5 +1,5 @@
 action_dim: 14
-horizon: 16
+horizon: 20
 condition_dim: 256
 d_model: 256
 nhead: 8
